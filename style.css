@@ -21,8 +21,7 @@ body {
 }
 
 .rondInfo {
-    background-color: #8a8a8a;
-    opacity: 0.5;
+    background-color: rgba(138,138,138,0.5);
     width: 15px;
     height: 15px;
     border-radius: 20px;
@@ -32,6 +31,7 @@ body {
     font-size: 11px;
     margin: auto;
 }
+
 
 .carte {
     width: 105px;
@@ -129,6 +129,14 @@ h1 {
     display: inline-block;
 }
 
+.info_carte{
+    display: block !important;
+}
+
+.info_carte div, .info_carte p{
+    display: inline-block;
+}
+
 #div_proj{
     margin-bottom: 150px;
 }
@@ -141,18 +149,27 @@ h1 {
     margin-bottom: 70px;
 }
 
+.div_proj_cartes div div.carte{
+    display: inline-block;
+    margin-right: 38px;
+    vertical-align: top;
+    text-align: center;
+}
+
 .div_proj_cartes div{
     display: inline-block;
-    margin-right: 88px;
+    margin-right: 38px;
+
 }
 
 .div_proj_cartes div p{
     margin-top: 0;
 }
 
-.div_proj_cartes div:last-child{
+.div_proj_cartes div:last-child, .div_proj_cartes div.carte{
     margin-right: 0;
 }
+
 /* ----- Heures ----- */
 .div_heures_ligne div p:first-child{
     font-size: 24px;
@@ -224,7 +241,7 @@ footer{
 .tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+    border-bottom: 1px dotted black;
 }
 
 /* Tooltip text */
@@ -232,7 +249,7 @@ footer{
     visibility: hidden;
     width: 250px;
     background-color: black;
-    color: #fff;
+    color: #FFFFFF;
     text-align: center;
     padding: 5px 0;
     border-radius: 6px;
@@ -263,3 +280,11 @@ footer{
     border-style: solid;
     border-color: black transparent transparent transparent;
 }
+
+.tooltip p{
+    vertical-align: top;
+    font-size: 0.8em;
+}
+
+
+/* Responsive */
