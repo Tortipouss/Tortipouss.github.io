@@ -4,6 +4,9 @@ body {
     background: #191919;
     padding-top: 1em;
     color: #FFFFFF;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #langues{
@@ -102,12 +105,18 @@ h1 {
 #div_pres {
     display: flex;
     margin-bottom: 100px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 #div_pres_liens{
     margin-top: auto;
     margin-bottom: auto;
     padding-left: 100px;
+}
+
+#div_pres_liens div:first-child{
+    margin-bottom: 20px;
 }
 
 /* ----- Projets ----- */
@@ -288,3 +297,44 @@ footer{
 
 
 /* Responsive */
+
+@media only screen and (max-width: 1000px) {
+    #langues{
+        text-align: center;
+        padding: 0;
+    }
+
+    #div_pres{
+        display: block;
+        text-align: center;
+    }
+
+    #div_pres_pic{
+        margin: 0;
+    }
+
+    #div_pres_liens{
+        display: inline-block;
+        padding: 0;
+    }
+
+    #div_pres_liens div.carte{
+        display: inline-block;
+    }
+
+    #div_pres_liens div:first-child{
+        margin-right: 10px;
+    }
+
+    #div_pres_liens div:last-child{
+        margin-left: 10px;
+    }
+
+    .div_proj_cartes{
+        width:80%;
+    }
+
+    .div_proj_cartes div.carte{
+        margin-bottom: 20px;
+    }
+}
