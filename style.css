@@ -389,11 +389,11 @@ footer{
         width: 320px;
     }
 
-    #div_heures .proj_titre div.rondInfo span, .div_heures_ligne div div.rondInfo span {
+    div.rondInfo span:not(.div_proj_cartes div:first-child div.info_carte span, .div_proj_cartes div:nth-child(3) div.info_carte span){
         bottom: 150%;
         left: 50%;
         margin-left: -225px;
-        border-color: transparent;
+        border-color: transparent !important;
     }
 
 }
