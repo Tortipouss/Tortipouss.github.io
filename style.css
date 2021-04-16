@@ -1,4 +1,5 @@
 /* GLOBAL STYLES */
+
 body {
     font-family: Roboto, sans-serif;
     background: #191919;
@@ -344,7 +345,52 @@ footer{
         width:80%;
     }
 
+    .div_proj_cartes div{
+        margin-right: 0;
+    }
+
     .div_proj_cartes div.carte{
         margin-bottom: 20px;
     }
+
+    #div_contact{
+        margin-bottom: 30px;
+    }
+
+    #langues{
+        margin-top: 20px;
+    }
+
+    #div_proj{
+        margin-bottom: 0;
+    }
+
+    .div_heures_ligne div:first-child{
+        padding-left: 0;
+    }
+
+    .div_heures_ligne div:last-child{
+        padding-right: 0;
+    }
+
+    .div_heures_ligne div p:last-child{
+        font-size: 34px;
+    }
+
+    .div_heures_ligne div p:first-child{
+        font-size: 14px;
+    }
+
+    #div_pres_info {
+        font-size: 26px;
+    }
+
+    #div_pres_pic img {
+        width: 320px;
+    }
+
+    div:not(.tooltip, .rondInfo) {
+        overflow-x: hidden;
+    }
+
 }
