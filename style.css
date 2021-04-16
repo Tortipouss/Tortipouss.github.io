@@ -389,8 +389,11 @@ footer{
         width: 320px;
     }
 
-    div:not(.tooltip, .rondInfo) {
-        overflow-x: hidden;
+    #div_heures .proj_titre div.rondInfo span, .div_heures_ligne div div.rondInfo span {
+        bottom: 150%;
+        left: 50%;
+        margin-left: -225px;
+        border-color: transparent;
     }
 
 }
