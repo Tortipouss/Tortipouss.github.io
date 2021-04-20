@@ -9,18 +9,18 @@
 
 <url>
   <loc>https://cv.alexg.ch/</loc>
-  <lastmod>2021-04-06T17:55:19+00:00</lastmod>
+  <lastmod>2021-04-20T08:45:48+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://cv.alexg.ch/en/</loc>
-  <lastmod>2021-04-06T17:55:19+00:00</lastmod>
+  <loc>https://cv.alexg.ch/en.html</loc>
+  <lastmod>2021-04-20T08:45:48+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://cv.alexg.ch/it/</loc>
-  <lastmod>2021-04-06T17:55:19+00:00</lastmod>
-  <priority>0.80</priority>
+  <loc>https://cv.alexg.ch/index.html</loc>
+  <lastmod>2021-04-20T08:45:48+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 
 
