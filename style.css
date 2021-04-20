@@ -349,8 +349,8 @@ footer{
         margin-right: 0;
     }
 
-    .div_proj_cartes div.carte{
-        margin-bottom: 20px;
+    .div_proj_cartes div{
+        margin-bottom: 0px;
     }
 
     #div_contact{
@@ -403,4 +403,16 @@ footer{
         display: block;
     }
 
+    .div_proj_cartes div div.carte{
+        margin-right: 11px;
+    }
+
+    .container{
+        padding-right: 30px;
+        margin-bottom: 30px !important;
+    }
+
+    .col_purple p{
+        margin-bottom: 10px;
+    }
 }
