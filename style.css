@@ -241,7 +241,7 @@ h1 {
     font-size: 1.5em;
 }
 
-footer p {
+footer p, footer img{
     font-size: 13px;
     color: #CDCDCD;
     margin-top: 0;
@@ -394,6 +394,13 @@ footer{
         left: 50%;
         margin-left: -225px;
         border-color: transparent !important;
+    }
+
+    footer img, footer p{
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        display: block;
     }
 
 }
