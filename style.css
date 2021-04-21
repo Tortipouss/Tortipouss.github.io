@@ -227,6 +227,32 @@ h1 {
     margin-bottom: 0;
 }
 
+/* --- Compétences ----- */
+#div_compet img{
+    width: 25px;
+    display: inline-block;
+}
+
+#div_compet p {
+    display: inline-block;
+    font-size: 1.5em;
+    margin-right: 1em;
+    text-align: left;
+}
+
+#div_compet div {
+    display: inline-block;
+    text-align: right;
+}
+
+#div_compet {
+    margin-left: 4%;
+    margin-right: 10%;
+    width: 70%;
+    display: grid;
+    grid-template-columns: 40% 40% 40%;
+    margin-bottom: 80px;
+}
 
 /* ---- Contact ---- */
 #div_contact{
@@ -309,75 +335,75 @@ footer{
 /* Responsive */
 
 @media only screen and (max-width: 1000px) {
-    #langues{
+    #langues {
         text-align: center;
         padding: 0;
     }
 
-    #div_pres{
+    #div_pres {
         display: block;
         text-align: center;
     }
 
-    #div_pres_pic{
+    #div_pres_pic {
         margin: 0;
     }
 
-    #div_pres_liens{
+    #div_pres_liens {
         display: inline-block;
         padding: 0;
     }
 
-    #div_pres_liens div.carte{
+    #div_pres_liens div.carte {
         display: inline-block;
         margin-bottom: 0;
     }
 
-    #div_pres_liens div:first-child{
+    #div_pres_liens div:first-child {
         margin-right: 10px;
     }
 
-    #div_pres_liens div:last-child{
+    #div_pres_liens div:last-child {
         margin-left: 10px;
     }
 
-    .div_proj_cartes{
-        width:80%;
+    .div_proj_cartes {
+        width: 80%;
     }
 
-    .div_proj_cartes div{
+    .div_proj_cartes div {
         margin-right: 0;
     }
 
-    .div_proj_cartes div{
+    .div_proj_cartes div {
         margin-bottom: 0px;
     }
 
-    #div_contact{
+    #div_contact {
         margin-bottom: 30px;
     }
 
-    #langues{
+    #langues {
         margin-top: 20px;
     }
 
-    #div_proj{
+    #div_proj {
         margin-bottom: 0;
     }
 
-    .div_heures_ligne div:first-child{
+    .div_heures_ligne div:first-child {
         padding-left: 0;
     }
 
-    .div_heures_ligne div:last-child{
+    .div_heures_ligne div:last-child {
         padding-right: 0;
     }
 
-    .div_heures_ligne div p:last-child{
+    .div_heures_ligne div p:last-child {
         font-size: 34px;
     }
 
-    .div_heures_ligne div p:first-child{
+    .div_heures_ligne div p:first-child {
         font-size: 14px;
     }
 
@@ -389,30 +415,52 @@ footer{
         width: 320px;
     }
 
-    div.rondInfo span:not(.div_proj_cartes div:first-child div.info_carte span, .div_proj_cartes div:nth-child(3) div.info_carte span){
+    div.rondInfo span:not(.div_proj_cartes div:first-child div.info_carte span, .div_proj_cartes div:nth-child(3) div.info_carte span) {
         bottom: 150%;
         left: 50%;
         margin-left: -225px;
         border-color: transparent !important;
     }
 
-    footer img, footer p{
+    footer img, footer p {
         margin-left: auto;
         margin-right: auto;
         text-align: center;
         display: block;
     }
 
-    .div_proj_cartes div div.carte{
+    .div_proj_cartes div div.carte {
         margin-right: 11px;
     }
 
-    .container{
+    .container {
         padding-right: 30px;
         margin-bottom: 30px !important;
     }
 
-    .col_purple p{
+    .col_purple p {
         margin-bottom: 10px;
     }
+
+    #div_compet div{
+        text-align: right;
+        width: 100%;
+        display: block;
+    }
+
+    #div_compet div p {
+        font-size: 1em;
+    }
+
+    #div_compet div img {
+        width: 20px;
+    }
+
+    #div_compet {
+        width: 70%;
+        display: grid;
+        grid-template-columns: 100%;
+        margin-bottom: 80px;
+    }
+
 }
