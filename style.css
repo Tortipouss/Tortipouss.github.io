@@ -220,11 +220,7 @@ h1 {
 }
 
 #div_heures{
-    margin-bottom: 100px;
-}
-
-#div_heures{
-    margin-bottom: 0;
+    margin-bottom: 60px;
 }
 
 /* --- Compétences ----- */
@@ -251,7 +247,7 @@ h1 {
     width: 70%;
     display: grid;
     grid-template-columns: 40% 40% 40%;
-    margin-bottom: 80px;
+    margin-bottom: 120px;
 }
 
 /* ---- Contact ---- */
