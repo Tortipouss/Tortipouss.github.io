@@ -455,7 +455,7 @@ footer{
 
     #div_compet div{
         text-align: right;
-        width: 100%;
+        width: fit-content;
         display: block;
     }
 
@@ -468,10 +468,20 @@ footer{
     }
 
     #div_compet {
-        width: 70%;
         display: grid;
         grid-template-columns: 100%;
         margin-bottom: 80px;
+        margin-right: auto;
+        margin-left: auto;
+        width: fit-content;
+        justify-items: right;
     }
 
 }
+
+@media only screen and (max-width: 1250px) and (min-width: 1000px){
+    #div_compet{
+        font-size: 0.8em;
+    }
+}
+
