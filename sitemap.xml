@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 <urlset
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -11,11 +11,6 @@
   <loc>https://cv.alexg.ch/</loc>
   <lastmod>2021-04-20T08:45:48+00:00</lastmod>
   <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://cv.alexg.ch/en.html</loc>
-  <lastmod>2021-04-20T08:45:48+00:00</lastmod>
-  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://cv.alexg.ch/index.html</loc>
