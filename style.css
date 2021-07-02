@@ -10,19 +10,19 @@ body {
     margin-right: auto;
 }
 
-#langues{
+#langues {
     text-align: right;
     padding-right: 50px;
 }
 
-#langues img{
+#langues img {
     margin-left: 5px;
 }
 
 
 /* ---- Variables --- */
 .col_purple {
-    color: #9543C8;
+    color: #07b9e7;
 }
 
 .col_blue_light {
@@ -30,13 +30,13 @@ body {
 }
 
 .rondInfo {
-    background-color: rgba(138,138,138,0.5);
+    background-color: rgba(138, 138, 138, 0.5);
     width: 15px;
     height: 15px;
     border-radius: 20px;
 }
 
-.rondInfo p{
+.rondInfo p {
     font-size: 11px;
     margin: auto;
 }
@@ -50,17 +50,17 @@ body {
     border-radius: 9px;
 }
 
-.carte:hover{
+.actif:hover {
     opacity: 0.6;
 }
 
-.carte img{
+.carte img {
     margin: auto;
     display: block;
     padding: 20%;
 }
 
-h2{
+h2 {
     font-size: 24px;
 }
 
@@ -79,7 +79,7 @@ h1 {
     margin-top: 10px;
 }
 
-.parag_evidence{
+.parag_evidence {
     width: 60%;
     text-align: left;
     margin-left: auto;
@@ -109,7 +109,7 @@ h1 {
     margin-top: 20px;
 }
 
-#div_pres_pic{
+#div_pres_pic {
     margin-left: 11em;
     margin-right: 4em;
 }
@@ -125,24 +125,24 @@ h1 {
     margin-left: auto;
 }
 
-#div_pres_liens{
+#div_pres_liens {
     margin-top: auto;
     margin-bottom: auto;
     padding-left: 100px;
 }
 
-#div_pres_liens div:first-child{
+#div_pres_liens div:first-child {
     margin-bottom: 20px;
 }
 
 /* ----- Projets ----- */
 
-.proj_titre{
+.proj_titre {
     text-align: center;
     margin-bottom: 30px;
 }
 
-.proj_titre .rondInfo{
+.proj_titre .rondInfo {
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 10px;
@@ -150,23 +150,29 @@ h1 {
     vertical-align: text-top;
 }
 
-.proj_titre h2{
+.proj_titre h2 {
     display: inline-block;
 }
 
-.info_carte{
+.proj_titre > p {
+    color: #d0c1c1;
+    margin-top: 0;
+    margin-bottom: 3em;
+}
+
+.info_carte {
     display: block !important;
 }
 
-.info_carte div, .info_carte p{
+.info_carte div, .info_carte p {
     display: inline-block;
 }
 
-#div_proj{
+#div_proj {
     margin-bottom: 150px;
 }
 
-.div_proj_cartes{
+.div_proj_cartes {
     margin-right: auto;
     margin-left: auto;
     display: block;
@@ -174,67 +180,67 @@ h1 {
     margin-bottom: 70px;
 }
 
-.div_proj_cartes div div.carte{
+.div_proj_cartes div div.carte {
     display: inline-block;
     margin-right: 38px;
     vertical-align: top;
     text-align: center;
 }
 
-.div_proj_cartes div{
+.div_proj_cartes div {
     display: inline-block;
     margin-right: 38px;
 
 }
 
-.div_proj_cartes div p{
+.div_proj_cartes div p {
     margin-top: 0;
 }
 
-.div_proj_cartes div:last-child, .div_proj_cartes div.carte{
+.div_proj_cartes div:last-child, .div_proj_cartes div.carte {
     margin-right: 0;
 }
 
 /* ----- Heures ----- */
-.div_heures_ligne div p:first-child{
+.div_heures_ligne div p:first-child {
     font-size: 24px;
-    color: #9543C8;
+    color: #07B9E7FF;
 }
 
-.div_heures_ligne div p:last-child{
+.div_heures_ligne div p:last-child {
     font-size: 64px;
     color: #ededed;
 }
 
-.div_heures_ligne{
+.div_heures_ligne {
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
 }
 
-.div_heures_ligne div{
+.div_heures_ligne div {
     text-align: center;
     width: 33%;
 }
 
-.div_heures_ligne div:first-child{
+.div_heures_ligne div:first-child {
     padding-left: 20%;
 }
 
-.div_heures_ligne div:last-child{
+.div_heures_ligne div:last-child {
     padding-right: 20%;
 }
 
-.div_heures_ligne div p{
+.div_heures_ligne div p {
     margin-top: 0;
 }
 
-#div_heures{
+#div_heures {
     margin-bottom: 60px;
 }
 
 /* --- Compétences ----- */
-#div_compet img{
+#div_compet img {
     width: 25px;
     display: inline-block;
 }
@@ -265,19 +271,19 @@ h1 {
 }
 
 /* ---- Contact ---- */
-#div_contact{
+#div_contact {
     margin-right: auto;
     margin-left: auto;
     display: block;
     text-align: center;
 }
 
-#div_contact a{
+#div_contact a {
     text-decoration: none;
     font-size: 1.5em;
 }
 
-footer p, footer img{
+footer p, footer img {
     font-size: 13px;
     color: #CDCDCD;
     margin-top: 0;
@@ -286,7 +292,7 @@ footer p, footer img{
 }
 
 /* ----- footer ----- */
-footer{
+footer {
     margin-bottom: 50px;
 }
 
@@ -336,7 +342,7 @@ footer{
     border-color: black transparent transparent transparent;
 }
 
-.tooltip p{
+.tooltip p {
     vertical-align: top;
     font-size: 0.8em;
 }
@@ -412,6 +418,7 @@ span.tooltiptext img {
         padding-right: 0;
     }
 
+
     .div_heures_ligne div p:last-child {
         font-size: 34px;
     }
@@ -455,7 +462,7 @@ span.tooltiptext img {
         margin-bottom: 10px;
     }
 
-    #div_compet div{
+    #div_compet div {
         text-align: right;
         width: fit-content;
         display: block;
@@ -481,8 +488,19 @@ span.tooltiptext img {
 
 }
 
-@media only screen and (max-width: 1250px) and (min-width: 1000px){
-    #div_compet{
+@media only screen and (min-width: 650px) and (max-width: 1000px) {
+    .div_heures_ligne div p:last-child {
+        font-size: 39px;
+    }
+
+    .div_heures_ligne div p:first-child {
+        font-size: 24px;
+    }
+}
+
+
+@media only screen and (max-width: 1250px) and (min-width: 1000px) {
+    #div_compet {
         font-size: 0.8em;
     }
 }
