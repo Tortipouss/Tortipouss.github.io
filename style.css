@@ -201,6 +201,13 @@ h1 {
     margin-right: 0;
 }
 
+/* ---------- Parcours --------- */
+#imgParcours{
+    margin: 0 auto 5% auto;
+    display: block;
+    width: 30%;
+}
+
 /* ----- Heures ----- */
 .div_heures_ligne div p:first-child {
     font-size: 24px;
@@ -484,6 +491,10 @@ span.tooltiptext img {
         margin-left: auto;
         width: fit-content;
         justify-items: right;
+    }
+
+    #imgParcours{
+        width: 40%;
     }
 
 }
