@@ -182,15 +182,17 @@ h1 {
 
 .div_proj_cartes div div.carte {
     display: inline-block;
-    margin-right: 38px;
     vertical-align: top;
     text-align: center;
 }
 
 .div_proj_cartes div {
     display: inline-block;
-    margin-right: 38px;
+}
 
+.div_proj_cartes div .carte, .div_proj_cartes div .info_carte{
+    margin-right: 30px !important;
+    margin-left: 30px;
 }
 
 .div_proj_cartes div p {
