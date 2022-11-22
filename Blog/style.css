@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+/* GLOBAL STYLES */
+body {
+    font-family: Roboto, sans-serif;
+    background: #191919;
+    padding-top: 1em;
+    color: #FFFFFF;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+
+
+h4 {
+    margin-top: 0;
+    font-style: italic;
+}
+
+h3 {
+    margin-bottom: 0;
+}
+
+figcaption{
+    color: silver;
+    font-style: italic;
+}
+
+.tbBordure, .tbBordure th, .tbBordure td {
+    padding: 20px;
+}
+
+/* ----------------- BLOG --------------- */
+
+.linedImg img, .linedImg h1 {
+    display: inline;
+}
+
+.linedImg {
+    margin-bottom: 30px;
+}
+
+.linedImg img {
+    margin-right: 10px;
+    width: 50px;
+}
+
+.linedImg h1{
+    vertical-align: super;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+div.gallery {
+    margin: 15px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 280px;
+    border-radius: 20px;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px 20px 0 0;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+    font-size: 1.5em;
+    color: white;
+}
+
+.articles {
+    display: inline-block;
+    padding-bottom: 3em;
+}
+
+.titleMainArt{
+    margin: 0 auto 0 auto;
+    font-size: 1em;
+}
+
+/* Badge */
+.badge {
+    font-size: 0.7em;
+    margin: 0.3em auto 0 auto;
+    width: max-content;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    border-radius: 0.2em;
+    display: inline-block;
+}
+
+.bg-tsql,
+.bg-plSql,
+.bg-sql{
+    background-color: #c27e34;
+}
+
+.bg-html-css{
+    background-color: green;
+}
+
+.bg-cpp{
+    background-color: blue;
+}
+
+.bg-vb{
+    background-color: blueviolet;
+}
+.bg-js{
+    background-color: gray;
+}
+
+.bg-php{
+    background-color: darkblue;
+}
+
+.bg-construct{
+    background-color: darkred;
+}
+
+
+footer p, footer img {
+    font-size: 13px;
+    color: #CDCDCD;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.miniature {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

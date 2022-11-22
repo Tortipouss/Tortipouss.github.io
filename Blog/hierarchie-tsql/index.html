@@ -1,0 +1,606 @@
+<!--
+Auteur : Alex Gallucci
+Site web CV : https://alexg.ch
+-->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Alex - Hiérarchies et MySQL Server </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../article.css">
+</head>
+<body>
+
+<!-- Barre supérieure -->
+<div class="linedImg">
+    <a href="https://alexg.ch">
+        <img src="../profile.png" alt="profile"/>
+        <h1>Alexg.ch</h1>
+    </a>
+</div>
+
+
+<!-- Titre et image principal -->
+<h1 id="mainTitle">Hiérarchies et MySQL Server</h1>
+<img id="mainImg" src="img/miniature.png" alt="Résultat d'une reqûete hierarchique"/>
+
+<!-- Table de matières -->
+<h1 id="tableMat">Table des matières</h1>
+<ul id="tableMatList">
+    <li><a href="#SEC-introduction">Introduction</a></li>
+    <li><a href="#SEC-hierarchiID">Avec HierarachiID</a>
+        <ul>
+            <li><a href="#SEC-Syntaxe">Méthodes</a></li>
+            <li><a href="#SEC-req1">Requête sur plusieurs tables</a></li>
+            <li><a href="#SEC-CS">Cheat-Sheet</a></li>
+            <li><a href="#SEC-trad">Traduction d'une requête Oracle (PL/SQL) vers TSQL</a></li>
+        </ul>
+    </li>
+    <li><a href="#SEC-Oracle">Avec colonne ID</a></li>
+</ul>
+
+<section id="SEC-introduction">
+    <h1 class="titleH1">Introduction</h1>
+    <p>Les enregistrements des tables nécessitent parfois d'être retournées de manières hierarchiques :</p>
+    <table class="tableauContour">
+        <tr>
+            <th> #</th>
+            <th> Nom</th>
+            <th> Titre</th>
+            <th> Niveau</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Pierre Point</td>
+            <td>PDG</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Klein Moine</td>
+            <td>Directeur Marketing</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Roger Andre</td>
+            <td>Assistant Marketing</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Mark Vil</td>
+            <td>Assistant Marketing</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Marie Clon</td>
+            <td>Directrice RH</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Elise Tant</td>
+            <td>Assistante RH</td>
+            <td>3</td>
+        </tr>
+    </table>
+    <br>
+    <p>TSQL permet toute sorte de manipulations hierarchiques.</p>
+    <p>Pour cela, 2 moyens s'offrent à nous :</p>
+    <ol>
+        <li style="margin-bottom: 1em">
+            Utiliser une colonne de type <strong>HierarchyID</strong> qui stock la position hyerarchique. <br>
+            <i>(Les requêtes deviendront alors beaucoup plus simples et optimisées).</i>
+        </li>
+        <li>
+            Utiliser une colonne qui stock la position hyerarchique sous forme d'identifiants.<br>
+            <i>(La méthode traditionnelle)</i>
+        </li>
+    </ol>
+</section>
+
+<section id="SEC-hierarchiID">
+    <h1 id="SEC-hierarch" class="titleH1">Avec HierarachiID</h1>
+    <p>Le type de données HierarchiID est intégralement conçu pour<br>
+        manipuler les hyerachies de données au sein des tables.</p>
+    <p>Il stocke l'information de manière similaire à varbinary,<br>
+        tout deux stoquent en binaire les données.</p>
+    <p>Voici comment l'utiliser. </p>
+    <p>1. On commence par créer notre table :</p>
+
+    <pre>
+        <code>
+<span style="color: dodgerblue">CREATE TABLE</span> employe
+(
+  emp_id <span style="color: orange">int</span> <span style="color: dodgerblue">PRIMARY KEY NOT NULL</span>,
+  emp_hy <span style="color: orange">hierarchyid</span> NOT NULL,
+  emp_nom <span style="color: orange">varchar(40)</span> NOT NULL,
+  emp_pre <span style="color: orange">varchar(40)</span> NOT NULL,
+  emp_titre <span style="color: orange">varchar(40)</span> NOT NULL
+);
+        </code>
+  </pre>
+
+
+    <p>2. On y insère les données suivantes : </p>
+    <code>
+        <span style="color: dodgerblue">INSERT INTO</span> employe <span style="color: dodgerblue">VALUES</span> (1,
+        '/1/', 'Point', 'Pierre', 'PDG')<br>
+        <span style="color: dodgerblue">INSERT INTO</span> employe <span style="color: dodgerblue">VALUES</span> (8,
+        '/1/1/', 'Moine', 'Klein', 'Directeur Marketing')<br>
+        <span style="color: dodgerblue">INSERT INTO</span> employe <span style="color: dodgerblue">VALUES</span> (2,
+        '/1/1/1/', 'Andre', 'Roger', 'Assistant Marketing')<br>
+        <span style="color: dodgerblue">INSERT INTO</span> employe <span style="color: dodgerblue">VALUES</span> (3,
+        '/1/1/2/', 'Vil', 'Mark', 'Assistant Marketing')<br>
+        <span style="color: dodgerblue">INSERT INTO</span> employe <span style="color: dodgerblue">VALUES</span> (7,
+        '/1/2/', 'Clon', 'Marie', 'Directrice RH')<br>
+        <span style="color: dodgerblue">INSERT INTO</span> employe <span style="color: dodgerblue">VALUES</span> (5,
+        '/1/2/1/', 'Tant', 'Elise', 'Assistante RH')<br>
+    </code>
+    <p>Ici, on insère directement sous forme d'une chaine de caractères l'emplacement<br>
+        hyerachique. Une conversion implicite est faite automatiquement.</p>
+    <br>
+    <p>3. Finalement, on récupère les donneés : </p>
+    <code>
+        <span style="color: dodgerblue">SELECT </span>CAST(emp_hy <span style="color: dodgerblue">AS</span> <span
+            style="color: orange">nvarchar(100)</span>) <span style="color: dodgerblue">AS</span> Level, emp_id,
+        emp_nom, emp_pre, emp_titre
+        <span style="color: dodgerblue">FROM</span> employe <span style="color: dodgerblue">ORDER BY</span> emp_hy;
+    </code>
+
+    <p>Là, on convertit vers un type texte afin qu'il soit lisible, autrement des données hexadécimales
+        s'afficheront.<br>
+        La méthode .ToString() qui sera expliquée plus bas permet d'arriver au même résultat.</p>
+    <p>Résultat de la requête : </p>
+    <table class="tableauContour">
+        <tr>
+            <th> #</th>
+            <th> Level</th>
+            <th> emp_id</th>
+            <th> emp_nom</th>
+            <th> emp_pre</th>
+            <th> emp_titre</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>/1/</td>
+            <td>1</td>
+            <td>Point</td>
+            <td>Pierre</td>
+            <td>PDG</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>/1/1/</td>
+            <td>8</td>
+            <td>Moine</td>
+            <td>Klein</td>
+            <td>Directeur Marketing</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>/1/1/1/</td>
+            <td>2</td>
+            <td>Andre</td>
+            <td>Roger</td>
+            <td>Assistant Marketing</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>/1/1/2/</td>
+            <td>3</td>
+            <td>Vil</td>
+            <td>Mark</td>
+            <td>Assistant Marketing</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>/1/2/</td>
+            <td>7</td>
+            <td>Clon</td>
+            <td>Marie</td>
+            <td>Directrice RH</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>/1/2/1/</td>
+            <td>5</td>
+            <td>Tant</td>
+            <td>Elise</td>
+            <td>Assistante RH</td>
+        </tr>
+    </table>
+
+    <h2 id="SEC-Syntaxe" class="titleH2">Méthodes</h2>
+    <p>Quelques méthodes parmis les plus pratiques : </p>
+    <ul>
+        <li>
+            <strong>.ToString()</strong><br>
+            Converti le nœud en chaine de charactères<br>
+            <code>
+                <span style="color: dodgerblue">SELECT</span> emp_hy.ToString(), emp_pre <span
+                    style="color: dodgerblue">WHERE</span>
+            </code>
+            emp_nom = 'Point' <br>
+            Résultat req. : /1/, Pierre
+        </li>
+        <li style="padding: 1em 0 1em 0">
+            <strong>HierarchiID::GetRoot()</strong><br>
+            Retourne le nœud racine.<br>
+            <code>
+                <span style="color: dodgerblue">SELECT</span> emp_hy.ToString(), emp_pre <span
+                    style="color: dodgerblue">WHERE</span>
+                emp_hy = HierarchiID::GetRoot() <br>
+            </code>
+            Résultat req. : /1/, Pierre
+        </li>
+        <li>
+            <strong>.GetLevel()</strong><br>
+            Retourne le niveau d'un noeud<br>
+            <code>
+                <span style="color: dodgerblue">SELECT </span>emp_hy.GetLevel() <span
+                    style="color: dodgerblue">AS</span>
+                Level, emp_id, emp_nom, emp_pre, emp_titre
+                <span style="color: dodgerblue">FROM</span> employe <span style="color: dodgerblue">ORDER BY</span>
+                emp_hy
+                <br>
+            </code>
+            Résultat :
+            <table class="tableauContour">
+                <tr>
+                    <th> #</th>
+                    <th> Level</th>
+                    <th> emp_id</th>
+                    <th> emp_nom</th>
+                    <th> emp_pre</th>
+                    <th> emp_titre</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>Point</td>
+                    <td>Pierre</td>
+                    <td>PDG</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>8</td>
+                    <td>Moine</td>
+                    <td>Klein</td>
+                    <td>Directeur Marketing</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>Andre</td>
+                    <td>Roger</td>
+                    <td>Assistant Marketing</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>Vil</td>
+                    <td>Mark</td>
+                    <td>Assistant Marketing</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>2</td>
+                    <td>7</td>
+                    <td>Clon</td>
+                    <td>Marie</td>
+                    <td>Directrice RH</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>Tant</td>
+                    <td>Elise</td>
+                    <td>Assistante RH</td>
+                </tr>
+            </table>
+        </li>
+    </ul>
+    <br>
+    <p>Liste complète des méthodes : <br>
+        <a style="color: deepskyblue" rel="noopener" target="_blank"
+           href="https://docs.microsoft.com/fr-fr/sql/t-sql/data-types/hierarchyid-data-type-method-reference?view=sql-server-ver15">https://docs.microsoft.com/fr-fr/sql/t-sql/data-types/hierarchyid-data-type-method-reference?view=sql-server-ver15</a>
+    </p>
+
+    <h2 id="SEC-req1" class="titleH2">Requête sur plusieurs tables</h2>
+    <p>Soit, les 3 tables suivantes :</p>
+    <div id="SqlTable3" style="display: block">
+
+        <div style="display:inline-block">
+            <span>Violoniste</span>
+            <table style="display: inline" class="tableauContour">
+                <tr>
+                    <th>vln_id</th>
+                    <th>vln_nom</th>
+                    <th>vln_pre</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Markus</td>
+                    <td>Pan</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Helene</td>
+                    <td>Vram</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Adam</td>
+                    <td>Pion</td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="display:inline-block;margin:5%">
+            <span>Jouer</span>
+            <table style="display: inline" class="tableauContour">
+                <tr>
+                    <th>vio_id</th>
+                    <th>vln_id</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>3</td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="display: inline-block">
+            <span>Violon</span>
+            <table style="display: inline" class="tableauContour">
+                <tr>
+                    <th>vio_id</th>
+                    <th>vio_hy</th>
+                    <th>vio_nom</th>
+                    <th>vio_niveau</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>/3/1/</td>
+                    <td>Hedersine HEV1</td>
+                    <td>Debutant</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>/2/1/</td>
+                    <td>Goetz Menuett-Heritage 98</td>
+                    <td>Avance</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>/1/1/</td>
+                    <td>Bavarian 1720 Stradivarius</td>
+                    <td>Professionnel</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>/1/2/</td>
+                    <td>Wessex XV Series</td>
+                    <td>Professionnel</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>/2/2/</td>
+                    <td>Hedersine Whitmarsh</td>
+                    <td>Avance</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>/3/2/</td>
+                    <td>Stentor student</td>
+                    <td>Debutant</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <p>Requête à executer : </p>
+    <p>
+        <code>
+            <span style="color: dodgerblue">SELECT</span> vio.vio_hy.ToString() <span
+                style="color: dodgerblue">AS</span>
+            Level, vio.vio_nom, vio.vio_niveau, vln.vln_nom, vln.vln_pre <br>
+            <span style="color: dodgerblue">FROM</span> violon <span style="color: dodgerblue">AS</span> vio <span
+                style="color: dodgerblue">JOIN</span><br>
+            jouer <span style="color: dodgerblue">AS</span> j <span style="color: dodgerblue">ON</span> j.vio_id =
+            vio.vio_id <span style="color: dodgerblue">JOIN</span><br>
+            violoniste <span style="color: dodgerblue">AS</span> vln <span style="color: dodgerblue">ON</span> j.vln_id
+            =
+            vln.vln_id <span style="color: dodgerblue">ORDER BY</span> vio.vio_hy<br>
+        </code>
+    </p>
+
+    <p>Résultat :</p>
+    <table class="tableauContour">
+        <tr>
+            <th>Level</th>
+            <th>vio_nom</th>
+            <th>vio_niveau</th>
+            <th>vln_nom</th>
+            <th>vln_pre</th>
+        </tr>
+        <tr>
+            <td>/1/1/</td>
+            <td>Bavarian 1720 Stradivarius</td>
+            <td>Professionnel</td>
+            <td>Markus</td>
+            <td>Pan</td>
+        </tr>
+        <tr>
+            <td>/3/1/</td>
+            <td>Hedersine HEV1</td>
+            <td>Debutant</td>
+            <td>Helene</td>
+            <td>Vram</td>
+        </tr>
+        <tr>
+            <td>/3/2/</td>
+            <td>Stentor student</td>
+            <td>Debutant</td>
+            <td>Adam</td>
+            <td>Pion</td>
+        </tr>
+    </table>
+
+    <h2 id="SEC-CS" class="titleH2">Cheat-sheet</h2>
+    <p>Voici une feuille d'aide que j'ai pu conceptualiser lors de mon stage.<br>
+    Celle-ci regroupe toutes sortes de manipulations liées aux hyerarchies.</p>
+    <pre>
+        -- Ajout d'une colonne hiérarchique dans une table
+        Alter table USINE ADD USI_H hierarchyid
+
+        -- Mis à jour d'un enregistement
+        UPDATE dbo.USINE SET USI_H = '/1/' WHERE USI_ID = 38
+
+        -- Comparaison
+        SELECT USI_H.ToString() FROM USINE WHERE [USI_H] < '/3/'
+        SELECT USI_H.ToString() FROM USINE WHERE [USI_H] > '/2/1/'
+
+
+
+        /* Récupèrer l'élément parent */
+        SELECT USI_ID, USI_NOM, USI_H.ToString() from USINE where (
+            SELECT USI_H.GetAncestor(1) as parent FROM USINE WHERE USI_ID = 68
+        ) = USI_H
+
+
+        /* Récupèrer l'élément + les éléments enfants */
+        SELECT USI_ID, USI_NOM, USI_H.ToString() from USINE WHERE USI_H.IsDescendantOf(
+            (SELECT USI_H.ToString() from USINE WHERE USI_ID = 40)
+        ) = 1
+
+
+        /* Récupèrer l'élément + tous les éléments parents */
+        SELECT t1.USI_H.ToString() as Path, t1.USI_ID
+        FROM (SELECT * FROM USINE WHERE USI_ID = 68) t2,
+        USINE t1
+        WHERE t2.USI_H.IsDescendantOf(t1.USI_H) = 1 ORDER BY Path
+
+        /* Récupère tous les éléments d'un niveau précis */
+        SELECT USI_ID, USI_NOM, USI_H.ToString() FROM USINE WHERE USI_H.GetLevel() = 1
+
+
+
+        --=======================================================================================
+        -- Retourne le future parent niveau 1 de la hiérarchie
+        -- Ex: Si le dernier noeud d'une hierarchie est /107/6/ : retourne /108/
+        --                                                /16/    : retourne /17/
+        --                                                /10/1/2/: retourne /11/
+        --
+        --=======================================================================================
+
+        SELECT top 1 hierarchyid::GetRoot().GetDescendant(t1.hyer ,null).ToString() as hyer from (
+
+            SELECT top 1 t0.hyer.GetAncestor(t0.niv - 1) as hyer from (
+
+                SELECT top 1 USI_H.GetLevel() as niv, USI_H as hyer from USINE order by USI_H desc
+
+            ) t0
+
+        ) t1, USINE
+
+
+
+        --=======================================================================================
+        -- Retourne le future frère du dernier enregistrement de la hiérarchie
+        -- Ex: Si le dernier noeud est    /10/1/4/    :    retourne /10/1/5/
+        --                                /2/2/        :    retourne /2/3/
+        --                                /20/        :    retourne /21/
+        --
+        -- Possibilité de changer le noeud de départ en changant la condition 1=1
+        --=======================================================================================
+        SELECT top 1 T1.hyer.GetAncestor(1).GetDescendant(T1.hyer ,null).ToString() AS hyer FROM (
+            SELECT top 1 USI_H as hyer from USINE where 1=1 order by hyer desc
+        ) T1, USINE order by USI_H desc
+
+
+
+
+        --============================================================================================================
+        -- Retourne le future dernier fils d'un enregistrement de la hiérarchie
+        -- Ex: Si le noeud noeud est    /10/1/    ET que le dernier fils de ce noeud est /10/1/7    :    retourne /10/1/8/
+        --                                /2/2/3/    ET que le dernier fils de ce noeud est /2/2/3/4    :    retourne /2/2/3/5
+        --                                /20/    ET que le dernier fils de ce noeud est /20/3    :    retourne /20/4/
+        --
+        -- Possibilité de changer le noeud de départ en changant la condition 1=1
+        --===========================================================================================================
+
+        SELECT top 1 T1.hyer.GetAncestor(1).GetDescendant(T1.hyer ,null).ToString() AS hyer FROM (
+            SELECT top 1 USI_H as hyer from USINE WHERE USI_H.IsDescendantOf(
+            (
+                SELECT USI_H from USINE WHERE USI_ID = 35
+            )
+            ) = 1 order by hyer desc
+        ) T1, USINE order by USI_H desc
+    </pre>
+
+    <h2 id="SEC-trad" class="titleH2">Traduction d'une requête Oracle (PL/SQL) vers TSQL</h2>
+</section>
+<section id="SEC-Oracle">
+    <h1>Avec Colonne ID</h1>
+    <p>La 2ᵉ méthode consiste à utiliser une colonne identifiant, de type INT <br>
+        et de faire une boucle afin de remonter à l'enregistrement parent.</p>
+    <p>Voici un exemple :</p>
+    <pre>
+        <code>
+        WITH descendant AS (
+
+        <span style="color: dodgerblue">SELECT</span> EMPLOYE.EMP_ID,
+        EMPLOYE.EMP_MAN_ID,
+        EMPLOYE.EMP_NOM,
+        EMPLOYE.EMP_PRE,
+        EMPLOYE.EMP_TITRE,
+        LEFT(CONCAT(CONVERT(<span style="color: orange">nvarchar(20)</span>, 1), ' - ', EMPLOYE.EMP_TRI),20) <span style="color: dodgerblue">AS</span> ordre
+        <span style="color: dodgerblue">FROM</span> EMPLOYE
+        <span style="color: dodgerblue">WHERE</span> EMPLOYE.EMP_MAN_ID <span style="color: dodgerblue">IS</span> null
+
+        UNION ALL
+
+        <span style="color: dodgerblue">SELECT</span> EMPLOYE.EMP_ID,
+        EMPLOYE.EMP_MAN_ID,
+        EMPLOYE.EMP_NOM,
+        EMPLOYE.EMP_PRE,
+        EMPLOYE.EMP_TITRE,
+        LEFT(CONCAT(descendant.ordre , ' - ', EMPLOYE.EMP_TRI),20) <span style="color: dodgerblue">AS</span> ordre
+        <span style="color: dodgerblue">FROM</span> EMPLOYE, descendant
+        <span style="color: dodgerblue">WHERE</span> descendant.EMP_ID = EMPLOYE.EMP_MAN_ID
+
+        )
+
+        <span style="color: dodgerblue">SELECT</span> descendant.EMP_ID,
+        descendant.EMP_MAN_ID <span style="color: dodgerblue">AS</span> ID_PERE,
+        descendant.EMP_NOM,
+        descendant.EMP_PRE,
+        descendant.EMP_TITRE,
+        descendant.ordre <span style="color: dodgerblue">AS</span> NIVEAU
+        <span style="color: dodgerblue">FROM</span> descendant
+        <span style="color: dodgerblue">ORDER BY</span> NIVEAU <span style="color: dodgerblue">ASC</span>
+    </code>
+    </pre>
+</section>
+</body>
+</html>

@@ -360,6 +360,118 @@ span.tooltiptext img {
     width: 250px;
 }
 
+/** BLOG **/
+
+#Blog > h1 {
+    font-size: 2.5em;
+    text-align: center;
+}
+
+#Blog div.articles h2 {
+    margin-left: 20px;
+}
+
+.linedImg img, .linedImg h1 {
+    display: inline;
+}
+
+.linedImg {
+    margin-bottom: 30px;
+}
+
+.linedImg img {
+    margin-right: 10px;
+    width: 50px;
+}
+
+.linedImg h1{
+    vertical-align: super;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+div.gallery {
+    margin: 15px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 280px;
+    border-radius: 20px;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px 20px 0 0;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+    font-size: 1.5em;
+    color: white;
+}
+
+.articles {
+    display: inline-block;
+    padding-bottom: 3em;
+}
+
+.titleMainArt{
+    margin: 0 auto 0 auto;
+    font-size: 1em;
+}
+
+/* Badge */
+.badge {
+    font-size: 0.7em;
+    margin: 0.3em auto 0 auto;
+    width: max-content;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    border-radius: 0.2em;
+    display: inline-block;
+}
+
+.bg-tsql,
+.bg-plSql,
+.bg-sql{
+    background-color: #c27e34;
+}
+
+.bg-html-css{
+    background-color: green;
+}
+
+.bg-cpp{
+    background-color: blue;
+}
+
+.bg-vb{
+    background-color: blueviolet;
+}
+.bg-js{
+    background-color: gray;
+}
+
+.bg-php{
+    background-color: darkblue;
+}
+
+.bg-construct{
+    background-color: darkred;
+}
+
+.titleMainArt {
+    font-size: 1em;
+}
+
 /* Responsive */
 
 @media only screen and (max-width: 1000px) {
@@ -510,7 +622,6 @@ span.tooltiptext img {
         font-size: 24px;
     }
 }
-
 
 @media only screen and (max-width: 1250px) and (min-width: 1000px) {
     #div_compet {
