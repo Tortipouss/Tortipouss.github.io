@@ -203,13 +203,6 @@ h1 {
     margin-right: 0;
 }
 
-/* ---------- Parcours --------- */
-#imgParcours{
-    margin: 0 auto 5% auto;
-    display: block;
-    width: 30%;
-}
-
 /* ----- Heures ----- */
 .div_heures_ligne div p:first-child {
     font-size: 24px;
@@ -472,6 +465,44 @@ div.desc {
     font-size: 1em;
 }
 
+/** Experience **/
+
+
+.carteExp {
+    max-width: 630px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    display: block;
+    background-color: rgba(204,204,204,0.1);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.titreCarteExp {
+    margin-bottom: 0;
+    color: #07b9e7;
+    font-size: 1.2em;
+}
+
+.dateCarteExp {
+    margin-top: 5px;
+    font-style: italic;
+}
+
+.listeTacheExp li {
+    margin-bottom: 0.6em;
+}
+
+.avecLogoExp{
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.imgCarteExp{
+    margin-right: 10px;
+}
+
 /* Responsive */
 
 @media only screen and (max-width: 1000px) {
@@ -516,7 +547,7 @@ div.desc {
     }
 
     .div_proj_cartes div {
-        margin-bottom: 0px;
+        margin-bottom: 0;
     }
 
     #div_contact {
@@ -629,3 +660,21 @@ div.desc {
     }
 }
 
+@media only screen and (max-width: 630px) {
+    div.gallery{
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    div.articles {
+        display: grid;
+    }
+
+}
+
+@media only screen and (max-width: 702px) {
+    .carteExp{
+        max-width: 400px;
+    }
+}
